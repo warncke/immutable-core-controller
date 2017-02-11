@@ -1,0 +1,28 @@
+{
+  "author": "Ersun Warncke <ersun.warncke@gmail.com>",
+  "dependencies": {
+    "immutable-core": "^1.1.2",
+    "immutable-core-model": "^0.6.8"
+  },
+  "description": "Immutable controller built on immutable-core",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "chai-subset": "^1.4.0",
+    "mocha": "^3.0.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=7.0.0"
+  },
+  "license": "MIT",
+  "main": "lib/immutable-core-controller.js",
+  "name": "immutable-core-controller",
+  "repository": "warncke/immutable-core-controller",
+  "scripts": {
+    "test": "mocha --harmony-async-await"
+  },
+  "version": "0.0.1"
+}
