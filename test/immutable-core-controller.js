@@ -39,6 +39,7 @@ describe('immutable-core-controller', function () {
         try {
             // reset global data
             immutable.reset()
+            ImmutableCoreModel.reset()
             // drop any test tables if they exist
             await database.query('DROP TABLE IF EXISTS foo')
         }
