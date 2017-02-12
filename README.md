@@ -46,12 +46,11 @@ interfaces for as well as having their own requirements.
                 type: string,
             },
         },
-        schema: {
-            properties: {
-                foo: {type: string},
-                bar: {type: string},
-            },
+        properties: {
+            bar: {type: string},
+            foo: {type: string},
         },
+        required: ['bar', 'foo'],
     })
 
     var fooController = new ImmutableCoreController({
@@ -71,7 +70,7 @@ update       | PUT    | /:fooId                      |
 delete       | DELETE | /:fooId                      |
 unDelete     | POST   | /:fooId/unDelete             |
 favorite     | POST   | /:fooId/favorite             |
-validate     | GET    | /validate                    |
+schema       | GET    | /schema                      |
 validate     | POST   | /validate                    |
 autocomplete | GET    | /autocomplete/:property      |
 
@@ -110,4 +109,22 @@ Delete an instance. Only available if action is enabled.
 
 ### unDelete
 
-unDelete an instance. Only available if action is enabled.
+UnDelete an instance. Only available if action is enabled.
+
+### favorite
+
+Another custom action performed on instance.
+
+### schema
+
+Returns the JSON schema for the create method which is the same as the JSON
+schema for the model by default.
+
+### validate
+
+Validates the data provided without saving it
+
+### autocomplete
+
+Takes a partial column value and returns a list of suggestions for it.
+Autocomplete routes are automatically created for all indexed columns.
