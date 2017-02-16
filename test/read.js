@@ -24,7 +24,7 @@ const connectionParams = {
     user: dbUser,
 }
 
-describe('immutable-core-controller - create', function () {
+describe('immutable-core-controller - read', function () {
 
     // create database connection to use for testing
     var database = new ImmutableDatabaseMariaSQL(connectionParams)
@@ -36,8 +36,7 @@ describe('immutable-core-controller - create', function () {
     }
 
     // define in before
-    var globalFooModel
-    var fooModel
+    var fooModel, globalFooModel, origBam, origBar, origFoo
 
     beforeEach(async function () {
         try {
@@ -64,75 +63,61 @@ describe('immutable-core-controller - create', function () {
             await globalFooModel.sync()
             // create local foo model with session
             fooModel = globalFooModel.session(session)
+            // create instances
+            origBam = await fooModel.create({foo: 'bam'})
+            origBar = await fooModel.create({foo: 'bar'})
+            origFoo = await fooModel.create({foo: 'foo'})
+
         }
         catch (err) {
             throw err
         }
     })
 
-    it('should create new model instance', async function () {
+    it('should read model instance', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
-        // get create method
-        var create = fooController.paths['/'].post.method
+        // get read method
+        var read = fooController.paths['/:id'].get.method
         // catch async errors
         try {
-            // create new instance
-            var origFoo = await create({
-                foo: {
-                    foo: 'bar',
-                },
+            // get instance
+            var bam = await read({
+                id: origBam.id,
                 session: session,
             })
-            // get JSON which is what will be returned by API
-            var res = origFoo.toJSON()
-            // check that object created
-            var foo = await fooModel.select.by.id(res.id)
-            // check that data matches
-            assert.deepEqual(foo.data, {foo: 'bar'})
         }
         catch (err) {
             throw err
         }
+        // check that data matches
+        assert.deepEqual(bam.toJSON(), origBam.toJSON())
     })
 
-    it('should create new model instance with meta data', async function () {
+    it('should throw 404 error if id not found', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
-        // get create method
-        var create = fooController.paths['/'].post.method
+        // get read method
+        var read = fooController.paths['/:id'].get.method
         // catch async errors
         try {
-            // create new instance
-            var origFoo = await create({
-                foo: {
-                    data: {
-                        foo: 'bar',
-                    },
-                    parentId: '11111111111111111111111111111111',
-                    sessionId: '11111111111111111111111111111111',
-                },
-                meta: true,
+            // get instance
+            var bam = await read({
+                id: 'XXX',
                 session: session,
             })
-            // get JSON which is what will be returned by API
-            var res = origFoo.toJSON()
-            // check that object created
-            var foo = await fooModel.select.by.id(res.id)
-            // check that data matches
-            assert.deepEqual(foo.data, {foo: 'bar'})
-            // check that meta data set
-            assert.strictEqual(foo.parentId, '11111111111111111111111111111111')
-            // sessionId should not be set
-            assert.strictEqual(foo.sessionId, session.sessionId)
         }
         catch (err) {
-            throw err
+            var threw = err
         }
+        // check error
+        assert.isDefined(threw)
+        assert.strictEqual(threw.code, 404)
+        assert.strictEqual(threw.message, 'Not Found')
     })
 
 })

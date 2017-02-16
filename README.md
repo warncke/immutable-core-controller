@@ -65,11 +65,11 @@ Method Name | Method | Path                          |
 -----------------------------------------------------|
 index        | GET    | /                            |
 create       | POST   | /                            |
-read         | GET    | /:fooId                      |
-update       | PUT    | /:fooId                      |
-delete       | DELETE | /:fooId                      |
-unDelete     | POST   | /:fooId/unDelete             |
-favorite     | POST   | /:fooId/favorite             |
+read         | GET    | /:id                         |
+update       | PUT    | /:id                         |
+delete       | DELETE | /:id                         |
+unDelete     | POST   | /:id/undelete                |
+favorite     | POST   | /:id/favorite                |
 schema       | GET    | /schema                      |
 validate     | POST   | /validate                    |
 autocomplete | GET    | /autocomplete/:property      |
