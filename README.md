@@ -1,4 +1,4 @@
-immutable-core-controller
+# immutable-core-controller
 
 Immutable Core Controller provides a class for defining controllers built
 on Immutable Core and tied into the Immutable App and Immutable Core Model
