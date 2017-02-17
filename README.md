@@ -61,8 +61,8 @@ In this example a controller is created for fooModel using all default options.
 
 ## Default methods
 
-Method Name | Method | Path                          |
------------------------------------------------------|
+Method Name  | Method | Path                         |
+-------------|--------|------------------------------|
 index        | GET    | /                            |
 create       | POST   | /                            |
 read         | GET    | /:id                         |
