@@ -72,7 +72,6 @@ unDelete     | POST   | /:id/undelete                |
 favorite     | POST   | /:id/favorite                |
 schema       | GET    | /schema                      |
 validate     | POST   | /validate                    |
-autocomplete | GET    | /autocomplete/:property      |
 
 ### index
 
@@ -123,8 +122,3 @@ schema for the model by default.
 ### validate
 
 Validates the data provided without saving it
-
-### autocomplete
-
-Takes a partial column value and returns a list of suggestions for it.
-Autocomplete routes are automatically created for all indexed columns.

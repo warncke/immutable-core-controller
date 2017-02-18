@@ -101,7 +101,7 @@ describe('immutable-core-controller', function () {
             'schema',
             'validate',
             'validateBefore',
-            'autocomplete'
+            //'autocomplete',
         ]
 
         _.each(methodNames, methodName => {
