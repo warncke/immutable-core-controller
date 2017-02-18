@@ -93,7 +93,7 @@ describe('immutable-core-controller - schema', function () {
             throw err
         }
         // non-meta schema should include only the data properties schema
-        assert.deepEqual(schema, schemaProperties)
+        assert.deepEqual(schema.properties, schemaProperties)
     })
 
     it('should get model meta schema', async function () {
