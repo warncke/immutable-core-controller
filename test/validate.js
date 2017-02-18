@@ -24,7 +24,7 @@ const connectionParams = {
     user: dbUser,
 }
 
-describe('immutable-core-controller - schema', function () {
+describe('immutable-core-controller - validate', function () {
 
     // create database connection to use for testing
     var database = new ImmutableDatabaseMariaSQL(connectionParams)
@@ -37,7 +37,7 @@ describe('immutable-core-controller - schema', function () {
 
     var schemaProperties = {
         foo: {
-            type: 'array',
+            type: 'string',
         },
     }
 
@@ -76,36 +76,43 @@ describe('immutable-core-controller - schema', function () {
         }
     })
 
-    it('should get model schema', async function () {
+    it('should validate instance data', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
-        // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        // get validate method
+        var validateMethod = fooController.paths['/validate'].post.method
         // catch async errors
         try {
-            var schema = await schemaMethod({
+            var res = await validateMethod({
+                foo: {
+                    foo: 'test'
+                },
                 session: session,
             })
         }
         catch (err) {
             throw err
         }
-        // non-meta schema should include only the data properties schema
-        assert.deepEqual(schema.properties, schemaProperties)
+        // check response
+        assert.deepEqual(res, {valid: true})
     })
 
-    it('should get model meta schema', async function () {
+    it('should validate meta data', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
-        // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        // get validate method
+        var validateMethod = fooController.paths['/validate'].post.method
         // catch async errors
         try {
-            var schema = await schemaMethod({
+            // create foo instance
+            var foo = await fooModel.create({foo: 'foo'})
+            // call validate good data
+            var res = await validateMethod({
+                foo: foo.toJSON(),
                 meta: true,
                 session: session,
             })
@@ -113,53 +120,57 @@ describe('immutable-core-controller - schema', function () {
         catch (err) {
             throw err
         }
-        // validate schema
-        assert.deepEqual(schema, globalFooModel.schemaMeta)
+        // check response
+        assert.deepEqual(res, {valid: true})
     })
 
-    it('should get action schema', async function () {
+    it('should throw error on invalid data', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
-        // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        // get validate method
+        var validateMethod = fooController.paths['/validate'].post.method
         // catch async errors
         try {
-            var schema = await schemaMethod({
-                action: 'delete',
+            var res = await validateMethod({
+                foo: {
+                    foo: [0, 1, 2]
+                },
                 session: session,
             })
         }
         catch (err) {
-            throw err
-        }
-        // if model does not have a data column then full meta schema
-        // is always returned
-        assert.deepEqual(schema, globalFooModel.actionModels.delete.schemaMeta)
-    })
-
-    it('should throw 400 error on invalid action', async function () {
-        // create new controller
-        var fooController = new ImmutableCoreController({
-            model: globalFooModel,
-        })
-        // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
-        // catch async errors
-        try {
-            var schema = await schemaMethod({
-                action: 'xxx',
-                session: session,
-            })
-        }
-        catch (err) {
-            var threw = err
+            var threw =  err
         }
         // 400 error should be throw
         assert.isDefined(threw)
         assert.strictEqual(threw.code, 400)
-        assert.strictEqual(threw.message, 'Invalid Action')
+        assert.strictEqual(threw.data[0].message, 'should be string')
+    })
+
+    it('should throw error on invalid meta data', async function () {
+        // create new controller
+        var fooController = new ImmutableCoreController({
+            model: globalFooModel,
+        })
+        // get validate method
+        var validateMethod = fooController.paths['/validate'].post.method
+        // catch async errors
+        try {
+            var res = await validateMethod({
+                foo: {},
+                meta: true,
+                session: session,
+            })
+        }
+        catch (err) {
+            var threw =  err
+        }
+        // 400 error should be throw
+        assert.isDefined(threw)
+        assert.strictEqual(threw.code, 400)
+        assert.strictEqual(threw.data.length, 5)
     })
 
 })
