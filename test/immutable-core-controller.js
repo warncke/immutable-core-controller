@@ -88,14 +88,15 @@ describe('immutable-core-controller', function () {
         assert.deepEqual(meta.instance, fooController)
 
         var methodNames = [
-            'index',
-            'indexBefore',
             'create',
+            'delete',
+            'deleteBefore',
+            'list',
+            'listBefore',
+            'new',
             'read',
             'update',
             'updateBefore',
-            'delete',
-            'deleteBefore',
             'unDelete',
             'unDeleteBefore',
             'schema',
@@ -105,7 +106,7 @@ describe('immutable-core-controller', function () {
         ]
 
         _.each(methodNames, methodName => {
-            assert.isFunction(module[methodName])
+            assert.isFunction(module[methodName], methodName+' not a function')
         })
     })
 

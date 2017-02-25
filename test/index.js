@@ -303,8 +303,6 @@ describe('immutable-core-controller - index', function () {
         try {
             // create revision of bam
             var updatedBam = await origBam.update({bar: 'bam'})
-            console.log(origBam.originalId)
-            console.log(updatedBam.originalId)
             // get index of model instances
             var res = await indexMethod({
                 order: 'createTime',

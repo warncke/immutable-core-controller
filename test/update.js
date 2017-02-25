@@ -89,6 +89,7 @@ describe('immutable-core-controller - update', function () {
                     foo: 'xxx'
                 },
                 id: origBam.id,
+                json: true,
                 session: session,
             })
         }
@@ -120,6 +121,7 @@ describe('immutable-core-controller - update', function () {
                     }
                 },
                 id: origBam.id,
+                json: true,
                 meta: true,
                 session: session,
             })
@@ -153,6 +155,7 @@ describe('immutable-core-controller - update', function () {
                 },
                 force: true,
                 id: origBam.id,
+                json: true,
                 session: session,
             })
         }
@@ -184,6 +187,7 @@ describe('immutable-core-controller - update', function () {
                     foo: 'yyy'
                 },
                 id: origBam.id,
+                json: true,
                 session: session,
             })
         }

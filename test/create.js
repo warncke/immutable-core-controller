@@ -1,8 +1,8 @@
 'use strict'
 
-const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const ImmutableCoreController = require('../lib/immutable-core-controller')
 const ImmutableCoreModel = require('immutable-core-model')
+const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const Promise = require('bluebird')
 const _ = require('lodash')
 const chai = require('chai')
@@ -59,6 +59,12 @@ describe('immutable-core-controller - create', function () {
                 },
                 database: database,
                 name: 'foo',
+                properties: {
+                    foo: {
+                        type: 'string',
+                    },
+                },
+                required: ['foo']
             })
             // sync with database
             await globalFooModel.sync()
@@ -84,6 +90,7 @@ describe('immutable-core-controller - create', function () {
                 foo: {
                     foo: 'bar',
                 },
+                json: true,
                 session: session,
             })
             // get JSON which is what will be returned by API
@@ -96,6 +103,36 @@ describe('immutable-core-controller - create', function () {
         catch (err) {
             throw err
         }
+    })
+
+    it('should redirect after create', async function () {
+        // create new controller
+        var fooController = new ImmutableCoreController({
+            model: globalFooModel,
+        })
+        // get create method
+        var create = fooController.paths['/'].post.method
+        // catch async errors
+        try {
+            // create new instance
+            var origFoo = await create({
+                foo: {
+                    foo: 'bar',
+                },
+                session: session,
+            })
+            // get JSON which is what will be returned by API
+            var res = origFoo.toJSON()
+            // check that object created
+            var foo = await fooModel.select.by.id(res.id)
+            // check that data matches
+            assert.deepEqual(foo.data, {foo: 'bar'})
+        }
+        catch (err) {
+            var threw = err
+        }
+        // check response
+        assert.strictEqual(threw.code, 302)
     })
 
     it('should create new model instance with meta data', async function () {
@@ -116,6 +153,7 @@ describe('immutable-core-controller - create', function () {
                     parentId: '11111111111111111111111111111111',
                     sessionId: '11111111111111111111111111111111',
                 },
+                json: true,
                 meta: true,
                 session: session,
             })
@@ -133,6 +171,53 @@ describe('immutable-core-controller - create', function () {
         catch (err) {
             throw err
         }
+    })
+
+    it('should return form with validation errors', async function () {
+        // create new controller
+        var fooController = new ImmutableCoreController({
+            model: globalFooModel,
+        })
+        // get create method
+        var create = fooController.paths['/'].post.method
+        // catch async errors
+        try {
+            // create new instance with invalid data
+            var res = await create({
+                foo: {},
+                session: session,
+            })
+        }
+        catch (err) {
+            throw err
+        }
+        // check response
+        assert.isObject(res.form)
+        // check that field has error
+        assert.strictEqual(res.form.fields[0].error, 'foo required')
+    })
+
+    it('should return form with validation errors', async function () {
+        // create new controller
+        var fooController = new ImmutableCoreController({
+            model: globalFooModel,
+        })
+        // get create method
+        var create = fooController.paths['/'].post.method
+        // catch async errors
+        try {
+            // create new instance with invalid data
+            var res = await create({
+                foo: {},
+                json: true,
+                session: session,
+            })
+        }
+        catch (err) {
+            var threw = err
+        }
+        // check response
+        assert.strictEqual(threw.code, 400)
     })
 
 })

@@ -1,8 +1,8 @@
 'use strict'
 
-const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const ImmutableCoreController = require('../lib/immutable-core-controller')
 const ImmutableCoreModel = require('immutable-core-model')
+const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const Promise = require('bluebird')
 const _ = require('lodash')
 const chai = require('chai')
@@ -24,7 +24,7 @@ const connectionParams = {
     user: dbUser,
 }
 
-describe('immutable-core-controller - read', function () {
+describe('immutable-core-controller - new', function () {
 
     // create database connection to use for testing
     var database = new ImmutableDatabaseMariaSQL(connectionParams)
@@ -36,7 +36,8 @@ describe('immutable-core-controller - read', function () {
     }
 
     // define in before
-    var fooModel, globalFooModel, origBam, origBar, origFoo
+    var globalFooModel
+    var fooModel
 
     beforeEach(async function () {
         try {
@@ -63,62 +64,30 @@ describe('immutable-core-controller - read', function () {
             await globalFooModel.sync()
             // create local foo model with session
             fooModel = globalFooModel.session(session)
-            // create instances
-            origBam = await fooModel.create({foo: 'bam'})
-            origBar = await fooModel.create({foo: 'bar'})
-            origFoo = await fooModel.create({foo: 'foo'})
-
         }
         catch (err) {
             throw err
         }
     })
 
-    it('should read model instance', async function () {
+    it('should return form for new instance', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
-        // get read method
-        var read = fooController.paths['/:id'].get.method
+        // get newMethod method
+        var newMethod = fooController.paths['/new'].get.method
         // catch async errors
         try {
-            // get instance
-            var bam = await read({
-                id: origBam.id,
-                json: true,
-                session: session,
-            })
+            // get form for creating new instance
+            var res = await newMethod({session: session})
         }
         catch (err) {
             throw err
         }
-        // check that data matches
-        assert.deepEqual(bam.toJSON(), origBam.toJSON())
-    })
-
-    it('should throw 404 error if id not found', async function () {
-        // create new controller
-        var fooController = new ImmutableCoreController({
-            model: globalFooModel,
-        })
-        // get read method
-        var read = fooController.paths['/:id'].get.method
-        // catch async errors
-        try {
-            // get instance
-            var bam = await read({
-                id: 'XXX',
-                session: session,
-            })
-        }
-        catch (err) {
-            var threw = err
-        }
-        // check error
-        assert.isDefined(threw)
-        assert.strictEqual(threw.code, 404)
-        assert.strictEqual(threw.message, 'Not Found')
+        // check that form created
+        assert.isObject(res.form)
+        assert.isArray(res.form.fields)
     })
 
 })
