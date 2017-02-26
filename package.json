@@ -6,7 +6,8 @@
     "immutable-core": "1.1.3",
     "immutable-core-model": "1.2.2",
     "immutable-require-valid-optional-object": "0.1.1",
-    "lodash": "4.17.4"
+    "lodash": "4.17.4",
+    "pluralize": "3.1.0"
   },
   "description": "Immutable controller built on immutable-core",
   "devDependencies": {
@@ -20,14 +21,14 @@
     "test": "test"
   },
   "engines": {
-    "node": ">=7.0.0"
+    "node": ">=7.6.0"
   },
   "license": "MIT",
   "main": "lib/immutable-core-controller.js",
   "name": "immutable-core-controller",
   "repository": "warncke/immutable-core-controller",
   "scripts": {
-    "test": "mocha --harmony-async-await"
+    "test": "mocha"
   },
-  "version": "0.1.1"
+  "version": "0.2.0"
 }

@@ -86,6 +86,7 @@ describe('immutable-core-controller - delete', function () {
             // delete instance
             var bam = await deleteMethod({
                 id: origBam.id,
+                json: true,
                 session: session,
             })
         }
@@ -108,6 +109,7 @@ describe('immutable-core-controller - delete', function () {
             // delete instance
             var deletedBar = await deleteMethod({
                 id: origBar.id,
+                json: true,
                 session: session,
             })
             // attempt to delete again - should 404
@@ -141,12 +143,14 @@ describe('immutable-core-controller - delete', function () {
             // delete instance
             await deleteMethod({
                 id: origBar.id,
+                json: true,
                 session: session,
             })
             // should get deleted with flag set
             await getMethod({
                 deleted: true,
                 id: origBar.id,
+                json: true,
                 session: session,
             })
             // attempt to delete again - should not 404 - should be no-op since
@@ -160,6 +164,7 @@ describe('immutable-core-controller - delete', function () {
             await unDeleteMethod({
                 deleted: true,
                 id: origBar.id,
+                json: true,
                 session: session,
             })
             // performaing action again should be noop and not throw error
@@ -193,6 +198,7 @@ describe('immutable-core-controller - delete', function () {
             // delete instance - should throw error
             await deleteMethod({
                 id: origFoo.id,
+                json: true,
                 session: session,
             })
         }
@@ -224,6 +230,7 @@ describe('immutable-core-controller - delete', function () {
             var deletedFoo = await deleteMethod({
                 force: true,
                 id: origBar.id,
+                json: true,
                 session: session,
             })
             // undelete old instace
@@ -231,6 +238,7 @@ describe('immutable-core-controller - delete', function () {
                 deleted: true,
                 force: true,
                 id: origBar.id,
+                json: true,
                 session: session,
             })
         }
@@ -260,6 +268,7 @@ describe('immutable-core-controller - delete', function () {
             var deletedFoo = await deleteMethod({
                 current: true,
                 id: origBar.id,
+                json: true,
                 session: session,
             })
             // undelete old instace
@@ -267,6 +276,7 @@ describe('immutable-core-controller - delete', function () {
                 deleted: true,
                 current: true,
                 id: origBar.id,
+                json: true,
                 session: session,
             })
         }

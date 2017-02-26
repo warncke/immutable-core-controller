@@ -24,7 +24,7 @@ const connectionParams = {
     user: dbUser,
 }
 
-describe('immutable-core-controller - index', function () {
+describe('immutable-core-controller - list', function () {
 
     // create database connection to use for testing
     var database = new ImmutableDatabaseMariaSQL(connectionParams)
@@ -108,7 +108,7 @@ describe('immutable-core-controller - index', function () {
             // get index of model instances
             var res = await indexMethod({
                 limit: 2,
-                order: 'createTime',
+                orderColumn: 'createTime',
                 session: session,
             })
         }
@@ -118,7 +118,8 @@ describe('immutable-core-controller - index', function () {
         // verify results
         assert.isObject(res)
         assert.isArray(res.records)
-        assert.strictEqual(res.result.length, 2)
+        assert.strictEqual(res.records.length, 2)
+        assert.strictEqual(res.result.length, 3)
         assert.deepEqual(res.records[0].data, origBam.data)
         assert.deepEqual(res.records[1].data, origBar.data)
     })
@@ -135,7 +136,8 @@ describe('immutable-core-controller - index', function () {
             // get index of model instances
             var res = await indexMethod({
                 limit: 2,
-                order: 'createTime,desc',
+                orderColumn: 'createTime',
+                orderDirection: 'DESC',
                 session: session,
             })
         }
@@ -145,7 +147,8 @@ describe('immutable-core-controller - index', function () {
         // verify results
         assert.isObject(res)
         assert.isArray(res.records)
-        assert.strictEqual(res.result.length, 2)
+        assert.strictEqual(res.records.length, 2)
+        assert.strictEqual(res.result.length, 3)
         assert.deepEqual(res.records[0].data, origFoo.data)
         assert.deepEqual(res.records[1].data, origBar.data)
     })
@@ -173,7 +176,8 @@ describe('immutable-core-controller - index', function () {
         // verify results
         assert.isObject(res)
         assert.isArray(res.records)
-        assert.strictEqual(res.result.length, 1)
+        assert.strictEqual(res.records.length, 1)
+        assert.strictEqual(res.result.length, 3)
         assert.deepEqual(res.records[0].data, origFoo.data)
     })
 
