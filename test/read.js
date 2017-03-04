@@ -80,7 +80,7 @@ describe('immutable-core-controller - read', function () {
             model: globalFooModel,
         })
         // get read method
-        var read = fooController.paths['/:id'].get.method
+        var read = fooController.paths['/:id'].get[0].method
         // catch async errors
         try {
             // get instance
@@ -103,7 +103,7 @@ describe('immutable-core-controller - read', function () {
             model: globalFooModel,
         })
         // get read method
-        var read = fooController.paths['/:id'].get.method
+        var read = fooController.paths['/:id'].get[0].method
         // catch async errors
         try {
             // get instance

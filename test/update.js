@@ -80,7 +80,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].put.method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // update instance
@@ -110,7 +110,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].put.method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // update instance
@@ -143,7 +143,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].put.method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // do update
@@ -176,7 +176,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].put.method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // do update
@@ -209,7 +209,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].put.method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // update non-existent instance

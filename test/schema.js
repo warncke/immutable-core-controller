@@ -82,7 +82,7 @@ describe('immutable-core-controller - schema', function () {
             model: globalFooModel,
         })
         // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        var schemaMethod = fooController.paths['/schema'].get[0].method
         // catch async errors
         try {
             var schema = await schemaMethod({
@@ -102,7 +102,7 @@ describe('immutable-core-controller - schema', function () {
             model: globalFooModel,
         })
         // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        var schemaMethod = fooController.paths['/schema'].get[0].method
         // catch async errors
         try {
             var schema = await schemaMethod({
@@ -123,7 +123,7 @@ describe('immutable-core-controller - schema', function () {
             model: globalFooModel,
         })
         // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        var schemaMethod = fooController.paths['/schema'].get[0].method
         // catch async errors
         try {
             var schema = await schemaMethod({
@@ -145,7 +145,7 @@ describe('immutable-core-controller - schema', function () {
             model: globalFooModel,
         })
         // get schema method
-        var schemaMethod = fooController.paths['/schema'].get.method
+        var schemaMethod = fooController.paths['/schema'].get[0].method
         // catch async errors
         try {
             var schema = await schemaMethod({

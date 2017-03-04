@@ -80,7 +80,7 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var deleteMethod = fooController.paths['/:id'].delete.method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
         // catch async errors
         try {
             // delete instance
@@ -103,7 +103,7 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var deleteMethod = fooController.paths['/:id'].delete.method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
         // catch async errors
         try {
             // delete instance
@@ -135,9 +135,9 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var getMethod = fooController.paths['/:id'].get.method
-        var deleteMethod = fooController.paths['/:id'].delete.method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post.method
+        var getMethod = fooController.paths['/:id'].get[0].method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
+        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // delete instance
@@ -190,7 +190,7 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var deleteMethod = fooController.paths['/:id'].delete.method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
         // catch async errors
         try {
             // do update
@@ -220,8 +220,8 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var deleteMethod = fooController.paths['/:id'].delete.method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post.method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
+        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // do update
@@ -258,8 +258,8 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var deleteMethod = fooController.paths['/:id'].delete.method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post.method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
+        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // do update
@@ -296,7 +296,7 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get delete method
-        var deleteMethod = fooController.paths['/:id'].delete.method
+        var deleteMethod = fooController.paths['/:id'].delete[0].method
         // catch async errors
         try {
             // delete non-existent instance
@@ -321,7 +321,7 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get undelete method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post.method
+        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // undelete non-existent instance

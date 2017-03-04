@@ -82,7 +82,7 @@ describe('immutable-core-controller - create', function () {
             model: globalFooModel,
         })
         // get create method
-        var create = fooController.paths['/'].post.method
+        var create = fooController.paths['/'].post[0].method
         // catch async errors
         try {
             // create new instance
@@ -111,7 +111,7 @@ describe('immutable-core-controller - create', function () {
             model: globalFooModel,
         })
         // get create method
-        var create = fooController.paths['/'].post.method
+        var create = fooController.paths['/'].post[0].method
         // catch async errors
         try {
             // create new instance
@@ -141,7 +141,7 @@ describe('immutable-core-controller - create', function () {
             model: globalFooModel,
         })
         // get create method
-        var create = fooController.paths['/'].post.method
+        var create = fooController.paths['/'].post[0].method
         // catch async errors
         try {
             // create new instance
@@ -179,7 +179,7 @@ describe('immutable-core-controller - create', function () {
             model: globalFooModel,
         })
         // get create method
-        var create = fooController.paths['/'].post.method
+        var create = fooController.paths['/'].post[0].method
         // catch async errors
         try {
             // create new instance with invalid data
@@ -203,7 +203,7 @@ describe('immutable-core-controller - create', function () {
             model: globalFooModel,
         })
         // get create method
-        var create = fooController.paths['/'].post.method
+        var create = fooController.paths['/'].post[0].method
         // catch async errors
         try {
             // create new instance with invalid data

@@ -82,7 +82,7 @@ describe('immutable-core-controller - validate', function () {
             model: globalFooModel,
         })
         // get validate method
-        var validateMethod = fooController.paths['/validate'].post.method
+        var validateMethod = fooController.paths['/validate'].post[0].method
         // catch async errors
         try {
             var res = await validateMethod({
@@ -105,7 +105,7 @@ describe('immutable-core-controller - validate', function () {
             model: globalFooModel,
         })
         // get validate method
-        var validateMethod = fooController.paths['/validate'].post.method
+        var validateMethod = fooController.paths['/validate'].post[0].method
         // catch async errors
         try {
             // create foo instance
@@ -130,7 +130,7 @@ describe('immutable-core-controller - validate', function () {
             model: globalFooModel,
         })
         // get validate method
-        var validateMethod = fooController.paths['/validate'].post.method
+        var validateMethod = fooController.paths['/validate'].post[0].method
         // catch async errors
         try {
             var res = await validateMethod({
@@ -155,7 +155,7 @@ describe('immutable-core-controller - validate', function () {
             model: globalFooModel,
         })
         // get validate method
-        var validateMethod = fooController.paths['/validate'].post.method
+        var validateMethod = fooController.paths['/validate'].post[0].method
         // catch async errors
         try {
             var res = await validateMethod({

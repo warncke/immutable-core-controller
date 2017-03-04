@@ -72,6 +72,11 @@ describe('immutable-core-controller', function () {
             },
             database: database,
             name: 'foo',
+            properties: {
+                foo: {
+                    type: 'string',
+                },
+            },
         })
         // create new controller
         var fooController = new ImmutableCoreController({

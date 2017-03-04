@@ -79,7 +79,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // get index of model instances
@@ -102,7 +102,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // get index of model instances
@@ -130,7 +130,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // get index of model instances
@@ -159,7 +159,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // get index of model instances
@@ -187,7 +187,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // get index of model instances
@@ -216,7 +216,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // get index of model instances
@@ -244,7 +244,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // delete record
@@ -272,7 +272,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // delete record
@@ -302,7 +302,7 @@ describe('immutable-core-controller - list', function () {
             model: globalFooModel,
         })
         // get index method
-        var indexMethod = fooController.paths['/'].get.method
+        var indexMethod = fooController.paths['/'].get[0].method
         // catch async errors
         try {
             // create revision of bam

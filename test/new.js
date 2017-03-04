@@ -59,6 +59,11 @@ describe('immutable-core-controller - new', function () {
                 },
                 database: database,
                 name: 'foo',
+                properties: {
+                    foo: {
+                        type: 'string',
+                    },
+                },
             })
             // sync with database
             await globalFooModel.sync()
@@ -76,7 +81,7 @@ describe('immutable-core-controller - new', function () {
             model: globalFooModel,
         })
         // get newMethod method
-        var newMethod = fooController.paths['/new'].get.method
+        var newMethod = fooController.paths['/new'].get[0].method
         // catch async errors
         try {
             // get form for creating new instance
