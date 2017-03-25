@@ -1,12 +1,12 @@
 {
   "author": "Ersun Warncke <ersun.warncke@gmail.com>",
   "dependencies": {
-    "debug": "2.6.1",
+    "debug": "2.6.3",
     "deep-extend": "0.4.1",
     "immutable-app-http-error": "0.1.1",
     "immutable-app-http-redirect": "0.1.0",
     "immutable-core": "1.2.0",
-    "immutable-core-model": "1.5.0",
+    "immutable-core-model": "1.5.2",
     "immutable-require-valid-optional-object": "0.1.1",
     "lodash": "4.17.4",
     "pluralize": "4.0.0"
@@ -32,5 +32,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.3.3"
+  "version": "0.3.4"
 }
