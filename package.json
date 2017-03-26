@@ -5,8 +5,8 @@
     "deep-extend": "0.4.1",
     "immutable-app-http-error": "0.1.1",
     "immutable-app-http-redirect": "0.1.0",
-    "immutable-core": "1.2.10",
-    "immutable-core-model": "1.5.9",
+    "immutable-core": "1.2.12",
+    "immutable-core-model": "1.5.10",
     "immutable-core-model-form": "^0.4.12",
     "immutable-require-valid-optional-object": "0.1.1",
     "lodash": "4.17.4",
@@ -17,7 +17,7 @@
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
     "chai-subset": "1.5.0",
-    "immutable-database-mariasql": "1.2.10",
+    "immutable-database-mariasql": "1.2.11",
     "mocha": "3.2.0"
   },
   "directories": {
@@ -33,5 +33,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.3.16"
+  "version": "0.3.17"
 }
