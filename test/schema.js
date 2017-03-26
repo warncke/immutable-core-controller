@@ -37,7 +37,7 @@ describe('immutable-core-controller - schema', function () {
 
     var schemaProperties = {
         foo: {
-            type: 'array',
+            type: 'string',
         },
     }
 
