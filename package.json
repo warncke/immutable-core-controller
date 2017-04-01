@@ -5,7 +5,7 @@
     "deep-extend": "0.4.1",
     "immutable-app-http-error": "0.1.1",
     "immutable-app-http-redirect": "0.1.0",
-    "immutable-core": "1.2.13",
+    "immutable-core": "1.2.14",
     "immutable-core-model": "1.6.2",
     "immutable-core-model-form": "0.4.19",
     "immutable-require-valid-optional-object": "0.1.1",
@@ -33,5 +33,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.3.23"
+  "version": "0.3.24"
 }
