@@ -1,5 +1,6 @@
 'use strict'
 
+const ImmutableAccessControl = require('immutable-access-control')
 const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const ImmutableCoreController = require('../lib/immutable-core-controller')
 const ImmutableCoreModel = require('immutable-core-model')
@@ -32,6 +33,7 @@ describe('immutable-core-controller - delete', function () {
     // fake session to use for testing
     var session = {
         accountId: '11111111111111111111111111111111',
+        roles: ['all', 'authenticated'],
         sessionId: '22222222222222222222222222222222',
     }
 
@@ -43,10 +45,16 @@ describe('immutable-core-controller - delete', function () {
             // reset global data
             immutable.reset()
             ImmutableCoreModel.reset()
+            ImmutableAccessControl.reset()
             // drop any test tables if they exist
             await database.query('DROP TABLE IF EXISTS foo')
             // create model for controller
             globalFooModel = new ImmutableCoreModel({
+                accessControlRules: [
+                    'list:deleted:any:1',
+                    'read:deleted:any:1',
+                    'unDelete:deleted:any:1',
+                ],
                 actions: {
                     delete: true,
                 },
