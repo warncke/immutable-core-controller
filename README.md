@@ -23,14 +23,7 @@ body, params, query, cookies, and headers.
 Controllers inherit JSON schema specifications from the model(s) that they provide
 interfaces for as well as having their own requirements.
 
-## Execution order
-
-1. Map express request to arguments
-2. Validate arguments
-3. Execute data load method if defined
-4. Execute controller method
-
-## Creating a controller
+## Creating a default controller for model
 
     const ImmutableCoreController = require('immutable-core-controller')
     const ImmutableCoreModel = require('immutable-core-model')
@@ -122,3 +115,13 @@ schema for the model by default.
 ### validate
 
 Validates the data provided without saving it
+
+## Creating a custom controller
+
+    var fooController = new ImmutableCoreController({
+        paths: {
+            '/foo': {
+
+            },
+        },
+    })
