@@ -8,7 +8,7 @@
     "immutable-app-http-redirect": "0.1.4",
     "immutable-core": "1.4.0",
     "immutable-core-model": "1.11.7",
-    "immutable-core-model-form": "0.6.25",
+    "immutable-core-model-form": "0.6.26",
     "immutable-require-valid-optional-object": "0.1.5",
     "lodash": "4.17.4",
     "pluralize": "5.0.0",
@@ -36,5 +36,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.4.43"
+  "version": "0.4.44"
 }
