@@ -107,6 +107,37 @@ describe('immutable-core-controller - update', function () {
         assert.strictEqual(bam.toJSON().parentId, origBam.id)
     })
 
+    it('should update model instance with merge', async function () {
+        // create new controller
+        var fooController = new ImmutableCoreController({
+            model: globalFooModel,
+        })
+        // get update method
+        var update = fooController.paths['/:id'].put[0].method
+        // catch async errors
+        try {
+            // update instance
+            var bar = await update({
+                foo: {
+                    bar: 'yyy'
+                },
+                id: origBar.id,
+                json: true,
+                merge: true,
+                session: session,
+            })
+        }
+        catch (err) {
+            throw err
+        }
+        // check that data matches
+        assert.deepEqual(bar.toJSON().data, {foo: 'bar', bar: 'yyy'})
+        // check that ids correct
+        assert.notEqual(bar.toJSON().id, origBar.id)
+        assert.strictEqual(bar.toJSON().originalId, origBar.id)
+        assert.strictEqual(bar.toJSON().parentId, origBar.id)
+    })
+
     it('should update model instance with meta', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
@@ -166,7 +197,7 @@ describe('immutable-core-controller - update', function () {
             throw err
         }
         // data from updates should be merged
-        assert.deepEqual(bam.toJSON().data, {bar: 'xxx', foo: 'xxx'})
+        assert.deepEqual(bam.toJSON().data, {foo: 'xxx'})
         // check that ids correct
         assert.notEqual(bam.toJSON().id, origBam.id)
         assert.strictEqual(bam.toJSON().originalId, origBam.id)
