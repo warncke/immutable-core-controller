@@ -203,9 +203,9 @@ describe('immutable-core-controller - list', function () {
                 limit: 2,
                 order: 'createTime',
                 session: session,
-                where: {
+                where: JSON.stringify({
                     foo: {eq: 'foo'}
-                },
+                }),
             })
         }
         catch (err) {
