@@ -56,9 +56,6 @@ describe('immutable-core-controller - validate', function () {
             await database.query('DROP TABLE IF EXISTS foo')
             // create model for controller
             globalFooModel = new ImmutableCoreModel({
-                actions: {
-                    delete: true,
-                },
                 columns: {
                     foo: {
                         index: true,

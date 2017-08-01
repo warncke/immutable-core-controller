@@ -55,9 +55,6 @@ describe('immutable-core-controller - list', function () {
                     'read:deleted:any:1',
                     'unDelete:deleted:any:1',
                 ],
-                actions: {
-                    delete: true,
-                },
                 columns: {
                     foo: {
                         index: true,
@@ -288,7 +285,7 @@ describe('immutable-core-controller - list', function () {
             // get index of model instances
             var res = await indexMethod({
                 deleted: true,
-                order: 'createTime',
+                orderColumn: 'createTime',
                 session: session,
             })
         }
@@ -300,37 +297,8 @@ describe('immutable-core-controller - list', function () {
         assert.isArray(res.records)
         assert.strictEqual(res.result.length, 3)
         assert.deepEqual(res.records[0].data, origBam.data)
-        assert.deepEqual(res.records[1].data, origBar.data)
-        assert.deepEqual(res.records[2].data, origFoo.data)
-    })
-
-    it.skip('should select by originalId', async function () {
-        // create new controller
-        var fooController = new ImmutableCoreController({
-            model: globalFooModel,
-        })
-        // get index method
-        var indexMethod = fooController.paths['/'].get[0].method
-        // catch async errors
-        try {
-            // create revision of bam
-            var updatedBam = await origBam.update({bar: 'bam'})
-            // get index of model instances
-            var res = await indexMethod({
-                order: 'createTime',
-                originalId: updatedBam.originalId,
-                session: session,
-            })
-        }
-        catch (err) {
-            throw err
-        }
-        // verify results
-        assert.isObject(res)
-        assert.isArray(res.records)
-        assert.strictEqual(res.result.length, 2)
-        assert.deepEqual(res.records[0].data, origBam.data)
-        assert.deepEqual(res.records[1].data, updatedBam.data)
+        assert.deepEqual(res.records[1].data, origFoo.data)
+        assert.deepEqual(res.records[2].data, origBar.data)
     })
 
 })

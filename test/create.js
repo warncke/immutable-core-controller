@@ -51,9 +51,6 @@ describe('immutable-core-controller - create', function () {
             await database.query('DROP TABLE IF EXISTS foo')
             // create model for controller
             globalFooModel = new ImmutableCoreModel({
-                actions: {
-                    delete: true,
-                },
                 columns: {
                     foo: {
                         index: true,
@@ -221,6 +218,30 @@ describe('immutable-core-controller - create', function () {
         }
         // check response
         assert.strictEqual(threw.code, 400)
+    })
+
+    it('should throw error if trying to set allow flag', async function () {
+        // create new controller
+        var fooController = new ImmutableCoreController({
+            model: globalFooModel,
+        })
+        // get create method
+        var create = fooController.paths['/'].post[0].method
+        // catch async errors
+        try {
+            // create new instance with invalid data
+            var res = await create({
+                foo: {allow: true},
+                json: true,
+                meta: true,
+                session: session,
+            })
+        }
+        catch (err) {
+            var threw = err
+        }
+        // check response
+        assert.strictEqual(threw.code, 403)
     })
 
 })

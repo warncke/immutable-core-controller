@@ -53,11 +53,8 @@ describe('immutable-core-controller - delete', function () {
                 accessControlRules: [
                     'list:deleted:any:1',
                     'read:deleted:any:1',
-                    'unDelete:deleted:any:1',
+                    'undelete:deleted:any:1',
                 ],
-                actions: {
-                    delete: true,
-                },
                 columns: {
                     foo: {
                         index: true,
@@ -122,7 +119,7 @@ describe('immutable-core-controller - delete', function () {
             })
             // attempt to delete again - should 404
             await deleteMethod({
-                id: origBar.id,
+                id: deletedBar.id,
                 session: session,
             })
         }
@@ -145,40 +142,27 @@ describe('immutable-core-controller - delete', function () {
         // get delete method
         var getMethod = fooController.paths['/:id'].get[0].method
         var deleteMethod = fooController.paths['/:id'].delete[0].method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
+        var undeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // delete instance
-            await deleteMethod({
+            var deletedBar = await deleteMethod({
                 id: origBar.id,
                 json: true,
                 session: session,
             })
             // should get deleted with flag set
-            await getMethod({
+            deletedBar = await getMethod({
                 deleted: true,
-                id: origBar.id,
+                id: deletedBar.id,
                 json: true,
-                session: session,
-            })
-            // attempt to delete again - should not 404 - should be no-op since
-            // instance already deleted
-            var deletedBar = await deleteMethod({
-                deleted: true,
-                id: origBar.id,
                 session: session,
             })
             // unDelete
-            await unDeleteMethod({
+            var unDeletedBar = await undeleteMethod({
                 deleted: true,
-                id: origBar.id,
+                id: deletedBar.id,
                 json: true,
-                session: session,
-            })
-            // performaing action again should be noop and not throw error
-            var unDeletedBar = await unDeleteMethod({
-                deleted: true,
-                id: origBar.id,
                 session: session,
             })
         }
@@ -189,7 +173,6 @@ describe('immutable-core-controller - delete', function () {
         assert.isTrue(deletedBar.isDeleted)
         // instance should be unDeleted
         assert.isFalse(unDeletedBar.isDeleted)
-        assert.isTrue(unDeletedBar.wasDeleted)
     })
 
     it('should throw 409 error when attempting to delete old revision', async function () {
@@ -229,20 +212,13 @@ describe('immutable-core-controller - delete', function () {
         })
         // get delete method
         var deleteMethod = fooController.paths['/:id'].delete[0].method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
+        var undeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // do update
             var updateFoo = await origFoo.update({foo: 'xxx'})
             // delete old instace
             var deletedFoo = await deleteMethod({
-                force: true,
-                id: origBar.id,
-                json: true,
-                session: session,
-            })
-            // undelete old instace
-            var unDeletedFoo = await unDeleteMethod({
                 deleted: true,
                 force: true,
                 id: origBar.id,
@@ -255,9 +231,6 @@ describe('immutable-core-controller - delete', function () {
         }
         // instance should be deleted
         assert.isTrue(deletedFoo.isDeleted)
-        // instance should be unDeleted
-        assert.isFalse(unDeletedFoo.isDeleted)
-        assert.isTrue(unDeletedFoo.wasDeleted)
     })
 
     it('should delete/undelete old instance when current is set', async function () {
@@ -267,7 +240,7 @@ describe('immutable-core-controller - delete', function () {
         })
         // get delete method
         var deleteMethod = fooController.paths['/:id'].delete[0].method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
+        var undeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // do update
@@ -280,7 +253,7 @@ describe('immutable-core-controller - delete', function () {
                 session: session,
             })
             // undelete old instace
-            var unDeletedFoo = await unDeleteMethod({
+            var unDeletedFoo = await undeleteMethod({
                 deleted: true,
                 current: true,
                 id: origBar.id,
@@ -295,7 +268,6 @@ describe('immutable-core-controller - delete', function () {
         assert.isTrue(deletedFoo.isDeleted)
         // instance should be unDeleted
         assert.isFalse(unDeletedFoo.isDeleted)
-        assert.isTrue(unDeletedFoo.wasDeleted)
     })
 
     it('should throw 404 error on delete if id not found', async function () {
@@ -329,11 +301,11 @@ describe('immutable-core-controller - delete', function () {
             model: globalFooModel,
         })
         // get undelete method
-        var unDeleteMethod = fooController.paths['/:id/undelete'].post[0].method
+        var undeleteMethod = fooController.paths['/:id/undelete'].post[0].method
         // catch async errors
         try {
             // undelete non-existent instance
-            await unDeleteMethod({
+            await undeleteMethod({
                 force: true,
                 id: 'xxx',
                 session: session,

@@ -56,9 +56,6 @@ describe('immutable-core-controller - schema', function () {
             await database.query('DROP TABLE IF EXISTS foo')
             // create model for controller
             globalFooModel = new ImmutableCoreModel({
-                actions: {
-                    delete: true,
-                },
                 columns: {
                     foo: {
                         index: true,
@@ -118,51 +115,6 @@ describe('immutable-core-controller - schema', function () {
         }
         // validate schema
         assert.deepEqual(schema, globalFooModel.schemaMeta)
-    })
-
-    it('should get action schema', async function () {
-        // create new controller
-        var fooController = new ImmutableCoreController({
-            model: globalFooModel,
-        })
-        // get schema method
-        var schemaMethod = fooController.paths['/schema'].get[0].method
-        // catch async errors
-        try {
-            var schema = await schemaMethod({
-                action: 'delete',
-                session: session,
-            })
-        }
-        catch (err) {
-            throw err
-        }
-        // if model does not have a data column then full meta schema
-        // is always returned
-        assert.deepEqual(schema, globalFooModel.actionModels.delete.schemaMeta)
-    })
-
-    it('should throw 400 error on invalid action', async function () {
-        // create new controller
-        var fooController = new ImmutableCoreController({
-            model: globalFooModel,
-        })
-        // get schema method
-        var schemaMethod = fooController.paths['/schema'].get[0].method
-        // catch async errors
-        try {
-            var schema = await schemaMethod({
-                action: 'xxx',
-                session: session,
-            })
-        }
-        catch (err) {
-            var threw = err
-        }
-        // 400 error should be throw
-        assert.isDefined(threw)
-        assert.strictEqual(threw.code, 400)
-        assert.strictEqual(threw.message, 'Invalid Action')
     })
 
 })

@@ -1,27 +1,19 @@
 # immutable-core-controller
 
-Immutable Core Controller provides a class for defining controllers built
-on Immutable Core and tied into the Immutable App and Immutable Core Model
-infrastructure.
+Immutable Core Controller integrates with the
+[Immutable App](https://www.npmjs.com/package/immutable-app) ecosystem to
+provide a class for defining controllers.
 
-The ImmutableCoreController class starts from a foundation of default behavior
-that allows controllers with standard CRUD functionality to be instatiated for models without any additional configuration in most cases.
+If a controller is insantiated with an
+[Immutable Core Model](https://www.npmjs.com/package/immutable-core-model)
+default controllers will be created with standard CRUD functionality.
 
-More complex controllers can be created by modifying and extending default
-controller functionality.
+## Immutable Core Controller v0.7 and Immutable Core Model v3
 
-Controllers return data as an object and it is up to the application
-infrastructure to determine how that data is presented.
+Immutable Core Controller v0.7.0 is required to support the breaking changes
+that were made in Immutable Core Model v3.
 
-Controller methods, like all immutable-core methods, take a single object as an
-argument.
-
-Controllers include a JSON schema specification of the requirements for each
-method as well as a mapping of how properties should be extracted from the request
-body, params, query, cookies, and headers.
-
-Controllers inherit JSON schema specifications from the model(s) that they provide
-interfaces for as well as having their own requirements.
+Immutable Core Controller v0.7 is not compatible with Imutable Core Model v2.
 
 ## Creating a default controller for model
 
@@ -29,16 +21,6 @@ interfaces for as well as having their own requirements.
     const ImmutableCoreModel = require('immutable-core-model')
 
     var fooModel = new ImmutableCoreModel({
-        actions: {
-            delete: true,
-            favorite: false,
-        },
-        columns: {
-            foo: {
-                index: true,
-                type: string,
-            },
-        },
         properties: {
             bar: {type: string},
             foo: {type: string},
@@ -61,8 +43,9 @@ create       | POST   | /                            |
 read         | GET    | /:id                         |
 update       | PUT    | /:id                         |
 delete       | DELETE | /:id                         |
-unDelete     | POST   | /:id/undelete                |
-favorite     | POST   | /:id/favorite                |
+delete       | GET    | /:id/delete                  |
+undelete     | POST   | /:id/undelete                |
+undelete     | GET    | /:id/undelete                |
 schema       | GET    | /schema                      |
 validate     | POST   | /validate                    |
 
@@ -71,7 +54,7 @@ validate     | POST   | /validate                    |
 The index method returns a list of model instances. This list is paginated and
 can be sorted and filtered by columns on the model.
 
-Parameters are mapped to immutable-core-model query args. For more complex queries
+Parameters are mapped to Immutable Core Model query args. For more complex queries
 JSON encoded query params can be set as the `query` param.
 
 Free form queries can be executed using the `search` param.
@@ -97,15 +80,23 @@ CONFLICT error will be returned.
 
 ### delete
 
-Delete an instance. Only available if action is enabled.
+Delete an instance. Only available if model has a (d)eleted column.
 
-### unDelete
+Delete is available as either an HTTP POST on the /:id path or an HTTP GET on
+the /:id/delete path.
 
-UnDelete an instance. Only available if action is enabled.
+When doing an HTTP DELETE data set in the body with the model name will be merged
+into the data of the undeleted object.
 
-### favorite
+### undelete
 
-Another custom action performed on instance.
+Undelete an instance. Only available if model has a (d)eleted column.
+
+Undelete is available by doing either an HTTP POST or HTTP GET to
+/:id/undelete.
+
+When doing an HTTP POST data set in the body with the model name will be merged
+into the data of the undeleted object.
 
 ### schema
 

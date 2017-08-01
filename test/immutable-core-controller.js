@@ -64,9 +64,6 @@ describe('immutable-core-controller', function () {
     it('should create new controller instance from model', function () {
         // create model for controller
         var fooModel = new ImmutableCoreModel({
-            actions: {
-                delete: true,
-            },
             columns: {
                 foo: {
                     index: true,
@@ -105,8 +102,8 @@ describe('immutable-core-controller', function () {
             'read',
             'update',
             'updateBefore',
-            'unDelete',
-            'unDeleteBefore',
+            'undelete',
+            'undeleteBefore',
             'schema',
             'validate',
             'validateBefore',
