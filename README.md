@@ -346,7 +346,7 @@ used.
 ## Controller Options
 
 Property   | Type     | Description                                         |
------------|----------------------------------------------------------------|
+-----------|----------|-----------------------------------------------------|
 after      | function | called after executing `method`                     |
 before     | function | called before executing `method`                    |
 input      | object   | properties from request mapped to args              |
