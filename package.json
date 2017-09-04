@@ -6,9 +6,9 @@
     "if-defined": "1.0.11",
     "immutable-app-http-error": "0.1.12",
     "immutable-app-http-redirect": "0.1.11",
-    "immutable-core": "1.4.29",
-    "immutable-core-model": "3.1.2",
-    "immutable-core-model-form": "0.7.48",
+    "immutable-core": "2.0.0",
+    "immutable-core-model": "3.3.0",
+    "immutable-core-model-form": "0.8.0",
     "immutable-require-valid-optional-object": "0.1.11",
     "lodash": "4.17.4",
     "pluralize": "7.0.0",
@@ -16,7 +16,7 @@
   },
   "description": "Immutable controller built on immutable-core",
   "devDependencies": {
-    "chai": "4.1.1",
+    "chai": "4.1.2",
     "chai-as-promised": "7.1.1",
     "chai-subset": "1.5.0",
     "immutable-access-control": "0.4.16",
@@ -36,5 +36,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.7.21"
+  "version": "0.8.0"
 }

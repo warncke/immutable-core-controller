@@ -86,11 +86,9 @@ describe('immutable-core-controller', function () {
         assert.isTrue(fooController instanceof ImmutableCoreController)
         // get immutable module for controller
         var module = immutable.module('fooController')
-        // get module meta data
-        var meta = module.meta()
         // check that meta properties stored
-        assert.strictEqual(meta.class, 'ImmutableCoreController')
-        assert.deepEqual(meta.instance, fooController)
+        assert.strictEqual(module.meta.class, 'ImmutableCoreController')
+        assert.deepEqual(module.meta.instance, fooController)
 
         var methodNames = [
             'create',
