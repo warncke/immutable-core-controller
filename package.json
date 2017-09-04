@@ -9,7 +9,7 @@
     "immutable-core": "2.0.1",
     "immutable-core-model": "3.3.2",
     "immutable-core-model-form": "0.8.2",
-    "immutable-require-valid-optional-object": "0.1.11",
+    "immutable-require-valid-optional-object": "0.1.12",
     "lodash": "4.17.4",
     "pluralize": "7.0.0",
     "ucfirst": "1.0.0"
@@ -36,5 +36,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.8.2"
+  "version": "0.8.3"
 }
