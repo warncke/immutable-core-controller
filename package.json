@@ -3,10 +3,10 @@
   "dependencies": {
     "debug": "3.0.1",
     "deep-extend": "0.5.0",
-    "if-defined": "1.0.12",
-    "immutable-app-http-error": "0.1.13",
-    "immutable-app-http-redirect": "0.1.12",
-    "immutable-core": "2.1.2",
+    "if-defined": "1.0.13",
+    "immutable-app-http-error": "0.1.14",
+    "immutable-app-http-redirect": "0.1.13",
+    "immutable-core": "2.2.1",
     "immutable-core-model": "3.3.8",
     "immutable-core-model-form": "0.8.11",
     "immutable-require-valid-optional-object": "0.1.12",
@@ -19,9 +19,9 @@
     "chai": "4.1.2",
     "chai-as-promised": "7.1.1",
     "chai-subset": "1.6.0",
-    "immutable-access-control": "0.5.3",
+    "immutable-access-control": "0.5.4",
     "immutable-database-mariasql": "1.3.22",
-    "mocha": "3.5.0"
+    "mocha": "3.5.1"
   },
   "directories": {
     "test": "test"
@@ -36,5 +36,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.8.10"
+  "version": "0.8.11"
 }
