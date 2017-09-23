@@ -294,6 +294,26 @@ records to link to.
 The `optionTitleProperty` and `optionValueProperty` for `input` specify the
 properties from the loaded records to populate the select with.
 
+### Customizing query args for read and list
+
+    var fooController = new ImmutableCoreController({
+        list: {
+            query: {
+                resolve: true,
+            },
+        },
+        read: {
+            query: {
+                resolve: true,
+            },
+        },
+        model: fooModel,
+    })
+
+Any arguments set in the `query` object for `list` or `view` will be used as
+default arguments for the Immutable Core Model query performed by the default
+controller.
+
 ## Creating a custom controller
 
     var fooController = new ImmutableCoreController({
