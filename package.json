@@ -6,7 +6,7 @@
     "if-defined": "1.0.14",
     "immutable-app-http-error": "0.1.15",
     "immutable-app-http-redirect": "0.1.14",
-    "immutable-core": "2.2.6",
+    "immutable-core": "2.2.7",
     "immutable-core-model": "3.4.4",
     "immutable-core-model-form": "0.9.3",
     "immutable-require-valid-optional-object": "0.1.14",
@@ -36,5 +36,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.9.8"
+  "version": "0.9.9"
 }
