@@ -36,5 +36,5 @@
   "scripts": {
     "test": "mocha --exit"
   },
-  "version": "0.9.38"
+  "version": "0.10.0"
 }
