@@ -8,22 +8,12 @@ If a controller is insantiated with an
 [Immutable Core Model](https://www.npmjs.com/package/immutable-core-model)
 default controllers will be created with standard CRUD functionality.
 
-## Immutable Core Controller v0.8 and Immutable Core v2
+## Immutable Core Controller v0.11 and Immutable Core Model v4
 
-Immutable Core Controller v0.8.0 is required to support breaking changes that
-were made in Immutable Core v2.
+Immutable Core Controller v0.11 is required to support the breaking changes
+that were made in Immutable Core Model v4.
 
-Immutable Core Controller v0.8.0 is not compatible with Immutable Core v1.
-
-As of v0.8.0 the global ImmutableAccessControl instance will always be used
-for route access control instead of route specific instances.
-
-## Immutable Core Controller v0.7 and Immutable Core Model v3
-
-Immutable Core Controller v0.7.0 is required to support the breaking changes
-that were made in Immutable Core Model v3.
-
-Immutable Core Controller v0.7 is not compatible with Imutable Core Model v2.
+Immutable Core Controller v0.11 is not compatible with Imutable Core Model v4.
 
 ## Creating a default controller for model
 

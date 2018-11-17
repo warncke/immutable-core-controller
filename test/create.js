@@ -3,7 +3,6 @@
 const ImmutableAccessControl = require('immutable-access-control')
 const ImmutableCoreController = require('../lib/immutable-core-controller')
 const ImmutableCoreModel = require('immutable-core-model')
-const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const Promise = require('bluebird')
 const _ = require('lodash')
 const chai = require('chai')
@@ -18,17 +17,13 @@ const dbUser = process.env.DB_USER || 'root'
 
 // use the same params for all connections
 const connectionParams = {
-    charset: 'utf8',
-    db: dbName,
+    database: dbName,
     host: dbHost,
     password: dbPass,
     user: dbUser,
 }
 
 describe('immutable-core-controller - create', function () {
-
-    // create database connection to use for testing
-    var database = new ImmutableDatabaseMariaSQL(connectionParams)
 
     // fake session to use for testing
     var session = {
@@ -38,8 +33,16 @@ describe('immutable-core-controller - create', function () {
     }
 
     // define in before
-    var globalFooModel
-    var fooModel
+    var fooModel, globalFooModel, mysql
+
+    before(async function () {
+        // create database connection to use for testing
+        mysql = await ImmutableCoreModel.createMysqlConnection(connectionParams)
+    })
+
+    after(async function () {
+        await mysql.close()
+    })
 
     beforeEach(async function () {
         try {
@@ -48,7 +51,7 @@ describe('immutable-core-controller - create', function () {
             ImmutableCoreModel.reset()
             ImmutableAccessControl.reset()
             // drop any test tables if they exist
-            await database.query('DROP TABLE IF EXISTS foo')
+            await mysql.query('DROP TABLE IF EXISTS foo')
             // create model for controller
             globalFooModel = new ImmutableCoreModel({
                 columns: {
@@ -57,7 +60,7 @@ describe('immutable-core-controller - create', function () {
                         type: 'string',
                     },
                 },
-                database: database,
+                mysql: mysql,
                 name: 'foo',
                 properties: {
                     foo: {
