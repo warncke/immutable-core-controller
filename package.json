@@ -6,10 +6,10 @@
     "if-defined": "1.0.18",
     "immutable-app-http-error": "0.1.19",
     "immutable-app-http-redirect": "0.1.17",
-    "immutable-core": "2.3.2",
-    "immutable-core-model": "4.0.2",
-    "immutable-core-model-form": "0.9.70",
-    "immutable-require-valid-optional-object": "0.1.17",
+    "immutable-core": "2.3.3",
+    "immutable-core-model": "4.0.3",
+    "immutable-core-model-form": "0.9.72",
+    "immutable-require-valid-optional-object": "0.1.18",
     "lodash": "4.17.11",
     "pluralize": "7.0.0",
     "ucfirst": "1.0.0"
@@ -19,7 +19,7 @@
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-subset": "1.6.0",
-    "immutable-access-control": "0.5.17",
+    "immutable-access-control": "0.5.18",
     "mocha": "5.2.0"
   },
   "directories": {
@@ -35,5 +35,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.11.0"
+  "version": "0.11.1"
 }
