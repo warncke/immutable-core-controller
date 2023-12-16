@@ -78,21 +78,21 @@ describe('immutable-core-controller - update', function () {
         }
     })
 
-    it('should update model instance with merge', async function () {
+    it('should update model instance', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].patch[0].method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // update instance
-            var bar = await update({
+            var bam = await update({
                 foo: {
-                    bar: 'yyy'
+                    foo: 'xxx'
                 },
-                id: origBar.id,
+                id: origBam.id,
                 json: true,
                 session: session,
             })
@@ -101,11 +101,11 @@ describe('immutable-core-controller - update', function () {
             throw err
         }
         // check that data matches
-        assert.deepEqual(bar.toJSON().data, {foo: 'bar', bar: 'yyy'})
+        assert.deepEqual(bam.toJSON().data, {foo: 'xxx'})
         // check that ids correct
-        assert.notEqual(bar.toJSON().id, origBar.id)
-        assert.strictEqual(bar.toJSON().originalId, origBar.id)
-        assert.strictEqual(bar.toJSON().parentId, origBar.id)
+        assert.notEqual(bam.toJSON().id, origBam.id)
+        assert.strictEqual(bam.toJSON().originalId, origBam.id)
+        assert.strictEqual(bam.toJSON().parentId, origBam.id)
     })
 
     it('should update model instance with meta', async function () {
@@ -114,7 +114,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].patch[0].method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // update instance
@@ -147,7 +147,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].patch[0].method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // do update
@@ -167,7 +167,7 @@ describe('immutable-core-controller - update', function () {
             throw err
         }
         // data from updates should be merged
-        assert.deepEqual(bam.toJSON().data, {bar: 'xxx', foo: 'xxx'})
+        assert.deepEqual(bam.toJSON().data, {foo: 'xxx'})
         // check that ids correct
         assert.notEqual(bam.toJSON().id, origBam.id)
         assert.strictEqual(bam.toJSON().originalId, origBam.id)
@@ -180,7 +180,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].patch[0].method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // do update
@@ -213,7 +213,7 @@ describe('immutable-core-controller - update', function () {
             model: globalFooModel,
         })
         // get update method
-        var update = fooController.paths['/:id'].patch[0].method
+        var update = fooController.paths['/:id'].put[0].method
         // catch async errors
         try {
             // update non-existent instance

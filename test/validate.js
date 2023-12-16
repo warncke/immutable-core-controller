@@ -12,8 +12,8 @@ const assert = chai.assert
 
 const dbHost = process.env.DB_HOST || 'localhost'
 const dbName = process.env.DB_NAME || 'test'
-const dbPass = process.env.DB_PASS || ''
-const dbUser = process.env.DB_USER || 'root'
+const dbPass = process.env.DB_PASS || 'test'
+const dbUser = process.env.DB_USER || 'test'
 
 // use the same params for all connections
 const connectionParams = {
@@ -47,7 +47,7 @@ describe('immutable-core-controller - validate', function () {
     })
 
     after(async function () {
-        await mysql.close()
+        await mysql.end()
     })
 
     beforeEach(async function () {
@@ -150,7 +150,7 @@ describe('immutable-core-controller - validate', function () {
         // 400 error should be throw
         assert.isDefined(threw)
         assert.strictEqual(threw.code, 400)
-        assert.strictEqual(threw.data[0].message, 'should be string')
+        assert.strictEqual(threw.data[0].message, 'must be string')
     })
 
     it('should throw error on invalid meta data', async function () {

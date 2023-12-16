@@ -1,32 +1,26 @@
 {
   "author": "Ersun Warncke <ersun.warncke@gmail.com>",
   "dependencies": {
-    "debug": "4.1.0",
+    "debug": "4.3.1",
     "deep-extend": "0.6.0",
     "if-defined": "1.0.18",
-    "immutable-app-http-error": "0.1.19",
-    "immutable-app-http-redirect": "0.1.17",
-    "immutable-core": "2.3.3",
-    "immutable-core-model": "4.0.3",
-    "immutable-core-model-form": "0.9.72",
+    "immutable-core": "3.1.0",
+    "immutable-core-model": "6.0.0",
     "immutable-require-valid-optional-object": "0.1.18",
-    "lodash": "4.17.11",
-    "pluralize": "7.0.0",
+    "lodash": "4.17.21",
+    "pluralize": "8.0.0",
     "ucfirst": "1.0.0"
   },
   "description": "Immutable controller built on immutable-core",
   "devDependencies": {
-    "chai": "4.2.0",
+    "chai": "4.3.4",
     "chai-as-promised": "7.1.1",
     "chai-subset": "1.6.0",
-    "immutable-access-control": "0.5.18",
-    "mocha": "5.2.0"
+    "immutable-access-control": "0.6.0",
+    "mocha": "10.2.0"
   },
   "directories": {
     "test": "test"
-  },
-  "engines": {
-    "node": ">=7.6.0"
   },
   "license": "MIT",
   "main": "lib/immutable-core-controller.js",
@@ -35,5 +29,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.11.1"
+  "version": "0.12.0"
 }

@@ -12,8 +12,8 @@ const assert = chai.assert
 
 const dbHost = process.env.DB_HOST || 'localhost'
 const dbName = process.env.DB_NAME || 'test'
-const dbPass = process.env.DB_PASS || ''
-const dbUser = process.env.DB_USER || 'root'
+const dbPass = process.env.DB_PASS || 'test'
+const dbUser = process.env.DB_USER || 'test'
 
 // use the same params for all connections
 const connectionParams = {
@@ -41,7 +41,7 @@ describe('immutable-core-controller - delete', function () {
     })
 
     after(async function () {
-        await mysql.close()
+        await mysql.end()
     })
 
     beforeEach(async function () {

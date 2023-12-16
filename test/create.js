@@ -12,8 +12,8 @@ const assert = chai.assert
 
 const dbHost = process.env.DB_HOST || 'localhost'
 const dbName = process.env.DB_NAME || 'test'
-const dbPass = process.env.DB_PASS || ''
-const dbUser = process.env.DB_USER || 'root'
+const dbPass = process.env.DB_PASS || 'test'
+const dbUser = process.env.DB_USER || 'test'
 
 // use the same params for all connections
 const connectionParams = {
@@ -41,7 +41,7 @@ describe('immutable-core-controller - create', function () {
     })
 
     after(async function () {
-        await mysql.close()
+        await mysql.end()
     })
 
     beforeEach(async function () {
@@ -108,36 +108,6 @@ describe('immutable-core-controller - create', function () {
         }
     })
 
-    it('should redirect after create', async function () {
-        // create new controller
-        var fooController = new ImmutableCoreController({
-            model: globalFooModel,
-        })
-        // get create method
-        var create = fooController.paths['/'].post[0].method
-        // catch async errors
-        try {
-            // create new instance
-            var origFoo = await create({
-                foo: {
-                    foo: 'bar',
-                },
-                session: session,
-            })
-            // get JSON which is what will be returned by API
-            var res = origFoo.toJSON()
-            // check that object created
-            var foo = await fooModel.select.by.id(res.id)
-            // check that data matches
-            assert.deepEqual(foo.data, {foo: 'bar'})
-        }
-        catch (err) {
-            var threw = err
-        }
-        // check response
-        assert.strictEqual(threw.code, 302)
-    })
-
     it('should create new model instance with meta data', async function () {
         // create new controller
         var fooController = new ImmutableCoreController({
@@ -183,21 +153,22 @@ describe('immutable-core-controller - create', function () {
         })
         // get create method
         var create = fooController.paths['/'].post[0].method
+        var err
         // catch async errors
         try {
             // create new instance with invalid data
-            var res = await create({
+            await create({
                 foo: {},
                 session: session,
             })
         }
-        catch (err) {
-            throw err
+        catch (e) {
+            err = e
         }
-        // check response
-        assert.isObject(res.form)
         // check that field has error
-        assert.strictEqual(res.form.fields[0].error, 'foo required')
+        assert.strictEqual(err.code, 400)
+        assert.strictEqual(err.data[0].instancePath, '/fooData')
+        assert.strictEqual(err.data[0].keyword, 'required')
     })
 
     it('should return form with validation errors', async function () {
